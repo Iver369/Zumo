@@ -8,6 +8,11 @@ void setup() {
   Serial.begin(9600);
   while(!Serial);
   eksempelfunksjon();
+
+  while (millis() - startTime < waitTime) {
+    motors.setSpeeds(200, -200)
+    linesensor.calibrate();
+}
 }
 
 void loop() {
