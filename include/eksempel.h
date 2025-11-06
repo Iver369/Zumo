@@ -1,6 +1,6 @@
 #ifndef EKSEMPEL_H
 #define EKSEMPEL_H
 
-void eksempelFunksjon();
+void eksempelfunksjon();
 
 #endif 
