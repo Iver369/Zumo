@@ -2,12 +2,10 @@
 #include "eksempel.h"
 
 // put function declarations here:
-int myFunction(int, int);
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  int result = myFunction(2, 3);
   eksempelfunksjon();
 }
 
