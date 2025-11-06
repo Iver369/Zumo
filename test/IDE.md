@@ -9,4 +9,10 @@ Plan:
 - En del av koden skal få bilen til å følge en linje (hva skal motoren gjøre om verdiene er mindre/større/lik 2000?)
 - En del av koden måp beregne batteristatus og beregne hvor langt bilen kan kjøre før den må lade 
 - En del av koden styrer hva som står på skjermen 
-- En del av koden observerer hindringer og får bilen til å stoppe opp
+- En del av koden observerer hindringer og får bilen til å stoppe opp (Bilen må ikke bråbremse, da dette ødelegger motoren)
+
+Motor: 
+- LOW er forover, HIGH er bakover
+- Digital pin 15 - kontrollerer den høyre motoren 
+- Digital pin 16 - kontrollerer venstre motor 
+
