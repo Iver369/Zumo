@@ -5,5 +5,7 @@
 
 Zumo32U4LCD lcd;
 
+void display();
+
 #endif 
 
