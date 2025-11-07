@@ -2,9 +2,11 @@
 #define LINE_FOLLOW_H
 #include <Zumo32U4.h>
 
-Zumo32U4Motors motors;
-Zumo32U4LineSensors lineSensors;
+// Declarations for globals used across source files.
+// Definitions (one instance) must live in a single .cpp file.
+extern Zumo32U4Motors motors;
+extern Zumo32U4LineSensors lineSensors;
 
-unsigned int sensorValues[5];
+extern unsigned int sensorValues[5];
 
 #endif

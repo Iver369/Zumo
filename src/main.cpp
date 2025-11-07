@@ -6,15 +6,13 @@
 #include "display.h"
 #include "obstacle.h"
 
-Zumo32U4Motors motors; // Create motors object
-Zumo32U4LineSensors lineSensor; // Create line sensors object
-
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
-  lineSensor.initFiveSensors(); // Initialize all five line sensors
-  calibrateLineSensors(lineSensor, motors, 5000); // Calibrate for 5 seconds
+  // Initialize shared line sensor object and motors (defined in globals.cpp)
+  lineSensors.initFiveSensors(); // Initialize all five line sensors
+  calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 seconds
   Serial.println("Calibration complete."); // Indicate completion
-  lineSensor.readCalibrated(sensorValues); // Read calibrated values
+  lineSensors.readCalibrated(sensorValues); // Read calibrated values
   display();
 
   for (int i = 0; i < 5; i++) { // Loop through each sensor

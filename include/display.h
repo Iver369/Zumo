@@ -3,7 +3,8 @@
 #include<Zumo32U4.h>
 #include <Arduino.h>
 
-Zumo32U4LCD lcd;
+// LCD instance declared here, defined in a single .cpp file.
+extern Zumo32U4LCD lcd;
 
 void display();
 
