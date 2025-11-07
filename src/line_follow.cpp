@@ -16,8 +16,4 @@ void linefollow() {
 
   leftSpeed  = constrain(leftSpeed,  -400, 400);
   rightSpeed = constrain(rightSpeed, -400, 400);
-
-  if (buttonA.isPressed()) {
-    motors.setSpeeds(leftSpeed, rightSpeed);
-  }
 }
