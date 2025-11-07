@@ -1,23 +1,21 @@
 #include <Arduino.h>
-#include "eksempel.h"
+#include <Zumo32U4.h>
+#include "calibrate.h"
 
-// put function declarations here:
+Zumo32U4Motors motors;
+Zumo32U4LineSensors lineSensor;
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  while(!Serial);
-  eksempelfunksjon();
+  while(!Serial); // Wait for Serial to be ready
+  lineSensor.initFiveSensors();
+  calibrateLineSensors(lineSensor, motors, 5000); // Calibrate for 5 seconds
+  Serial.println("Calibration complete.");
 
-  while (millis() - startTime < waitTime) {
-    motors.setSpeeds(200, -200)
-    linesensor.calibrate();
-}
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 }
 
-// put function definitions here:
 
