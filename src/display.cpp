@@ -1,3 +1,5 @@
+#include <display.h>
+
 void setup(){
     lcd.clear();
     delay(1000);
