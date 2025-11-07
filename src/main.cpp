@@ -12,19 +12,22 @@ void setup() {
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 seconds
   Serial.println("Calibration complete."); // Indicate completion
-  lineSensors.readCalibrated(sensorValues); // Read calibrated values
   display();
 
-  for (int i = 0; i < 5; i++) { // Loop through each sensor
+
+
+  }
+
+
+void loop() {
+  Serial.println("----------");
+  lineSensors.readCalibrated(sensorValues); // Read calibrated values
+    for (int i = 0; i < 5; i++) { // Loop through each sensor
     Serial.print("Sensor ");
     Serial.print(i);
     Serial.print(": ");
-    Serial.println(sensorValues[i]); // Print each sensor value
-  }
-}
-
-void loop() {
-
-}
+    Serial.print (sensorValues[i]); // Print each sensor value
+    Serial.print ("   ");
+}}
 
 
