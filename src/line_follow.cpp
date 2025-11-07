@@ -1,5 +1,4 @@
 #include "line_follow.h"
-#include "globals.h"
 
 void linefollow() {
   // DO NOT re-init here; it clears calibration.

@@ -1,18 +1,78 @@
-#include <Arduino.h>
+#include "battery.h"
+#include "globals.h"
+#include <zumo32U4Encoders.h>
 
-int battery_cap=100;
-int power = 0.5; // kan justeres for hvor fort batteriet skal tømmes
-int battery_calculator(int speed,int time){
-    battery_cap -= abs((speed/time)*power); //enkel formel for å beregne hvor mye det blir igjen på batteriet
-    if(battery_cap<=0){
-        Serial.println("Du er tom for strøm og bilen stopper");
+Zumo32U4Encoders encoders;
+
+float remaining_distance() {
+    const float MAX_RANGE = 100.0; // meters when fully charged
+    return (battery_cap / 100.0) * MAX_RANGE;
+}
+
+int battery_calculator(float deltaTime) {
+    static int lastLeftCount = 0;
+    static int lastRightCount = 0;
+    int leftCount = encoders.getCountsLeft();
+    int rightCount = encoders.getCountsRight();
+
+    int deltaLeft = leftCount - lastLeftCount;
+    int deltaRight = rightCount - lastRightCount;
+
+    lastLeftCount = leftCount;
+    lastRightCount = rightCount;
+
+    float leftSpeed = deltaLeft / deltaTime;
+    float rightSpeed = deltaRight / deltaTime;
+
+    float avgSpeed = (leftSpeed + rightSpeed) / 2.0;
+   
+    battery_cap -= abs(avgSpeed * power * 0.001); 
+
+    if (battery_cap < 0) battery_cap = 0;
+    if (battery_cap > 100) battery_cap = 100;
+
+    return battery_cap; 
+}
+
+void checkBatteryState() {
+    if (battery_cap <= 0) {
+        stopCarIfEmpty(); 
+    } 
+    else if (battery_cap < 15) {
+        Serial.println("Warning: Low battery!");
+        Serial.print("Battery level: ");
+        Serial.print(battery_cap);
+        Serial.println("%");
+    } 
+    else {
+        Serial.print("Battery level: ");
+        Serial.print(battery_cap);
+        Serial.println("%");
     }
-    else if (battery_cap>15){
-        Serial.println("Du er nesten tom for strøm og bør lade");
+}
+
+void stopCarIfEmpty() {
+    motors.setSpeeds(0, 0);
+    Serial.println("Battery empty! Car stopped.");
+    // Sensor to detect charging station, digitalRead IR sensor? bool atChargingStation = digitalRead(pin);
+    // Zumo line sensors for our line-following path is black tape, so we could use a special area of white tape to act as a charging station marker.
+    bool atChargingStation = true;
+    if (atChargingStation) {
+        chargeBattery();
+    } else {
+        Serial.println("Drive to the nearest charging station.");
     }
-    else{
-        Serial.println("Dette er din batteri prosent:");
-        Serial.println(battery_cap);
+
+}
+
+void chargeBattery() {
+    Serial.println("Charging started...");
+    while (battery_cap < 100) {
+        battery_cap += 1;          
+        Serial.print("Charging: ");
+        Serial.print(battery_cap);
+        Serial.println("%");
+        delay(100);               
     }
-    return battery_cap;
+    Serial.println("Charging complete. Ready to drive!");
 }

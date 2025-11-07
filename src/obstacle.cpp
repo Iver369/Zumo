@@ -36,10 +36,24 @@ void UltraSonicSensor::averageDistance() {
 }
 
 void UltraSonicSensor::printDebug() {
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.println(" cm");
+    static unsigned long lastPrint = 0;
+    unsigned long now = millis();
+
+    if (now - lastPrint >= 250) { 
+        lastPrint = now;
+        Serial.print("Raw: ");
+        Serial.print(distance);
+        Serial.print(" cm | Avg: ");
+        Serial.print(average);
+        Serial.print(" cm");
+
+        if (isObstacleNear()) {
+            Serial.print(" - OBSTACLE DETECTED");
+        }
+        Serial.println();
+    }
 }
+
 
 bool UltraSonicSensor::isObstacleNear() {
     if (distance <= threshold) {
