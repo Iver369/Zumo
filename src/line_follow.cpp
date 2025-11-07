@@ -1,11 +1,9 @@
-#include "line_follow.h"
-
 void setup() {
   lineSensors.initFiveSensors();
   delay(1000);
 }
 
-void loop() {
+void linefollow() {
   int pos = lineSensors.readLine(sensorValues);
 
   int error = pos - 2000;
