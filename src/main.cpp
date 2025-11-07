@@ -17,7 +17,7 @@ void setup() {
   lineSensor.readCalibrated(sensorValues); // Read calibrated values
   display();
 
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 5; i++) { // Loop through each sensor
     Serial.print("Sensor ");
     Serial.print(i);
     Serial.print(": ");
