@@ -3,6 +3,7 @@
 
 class UltraSonicSensor {
 public:
+    // Methods
     void init(int trigPin, int echoPin, float threshold);
     float readDistance();
     bool isObstacleNear();
