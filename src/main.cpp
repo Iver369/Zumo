@@ -5,6 +5,7 @@
 #include "battery.h"
 #include "display.h"
 #include "obstacle.h"
+int offset = 0;
 
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
@@ -20,7 +21,10 @@ void setup() {
 
 
 void loop() {
-  Serial.println("----------");
+  Serial.print("Offset: ");
+  offset = lineSensors.readLine(sensorValues);
+  Serial.print(offset);
+  Serial.println("");
   lineSensors.readCalibrated(sensorValues); // Read calibrated values
     for (int i = 0; i < 5; i++) { // Loop through each sensor
     Serial.print("Sensor ");
