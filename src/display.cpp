@@ -13,6 +13,7 @@ void display(){
     lcd.print("x meter");
     lcd.gotoXY(1,0);
     lcd.print("igjen");
+    delay(3000);
     lcd.clear();
 }
 
