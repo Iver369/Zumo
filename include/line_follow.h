@@ -9,4 +9,6 @@ extern Zumo32U4LineSensors lineSensors;
 
 extern unsigned int sensorValues[5];
 
+void linefollow();
+
 #endif
