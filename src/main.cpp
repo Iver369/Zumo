@@ -15,6 +15,7 @@ void setup() {
   calibrateLineSensors(lineSensor, motors, 5000); // Calibrate for 5 seconds
   Serial.println("Calibration complete."); // Indicate completion
   lineSensor.readCalibrated(sensorValues); // Read calibrated values
+  display();
 
   for (int i = 0; i < 5; i++) {
     Serial.print("Sensor ");

@@ -15,4 +15,3 @@ Motor:
 - LOW er forover, HIGH er bakover
 - Digital pin 15 - kontrollerer den høyre motoren 
 - Digital pin 16 - kontrollerer venstre motor 
-
