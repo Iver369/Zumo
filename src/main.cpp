@@ -21,6 +21,7 @@ void setup() {
 
 
 void loop() {
+  linefollow();
   Serial.print("Offset: ");
   offset = lineSensors.readLine(sensorValues);
   Serial.print(offset);
