@@ -10,6 +10,7 @@ void setup() {
   lineSensor.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensor, motors, 5000); // Calibrate for 5 seconds
   Serial.println("Calibration complete."); // Indicate completion
+  void 	readCalibrated (unsigned int *sensor_values, unsigned char readMode=QTR_EMITTERS_ON);
 }
 
 void loop() {
