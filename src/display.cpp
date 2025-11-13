@@ -35,7 +35,7 @@ switch (state) {
             lcd.gotoXY(0,1);
             lcd.print("til å");
             previousMillis = currentMillis;
-            state = 3
+            state = 3;
         }
         break;
    
@@ -46,7 +46,7 @@ switch (state) {
             previousMillis = currentMillis;
             state = 4;
         }
-        break = 4;
+        break;
     
     case 4:
         if (currentMillis - previousMillis >= 500) {
