@@ -42,7 +42,7 @@ void displayStatus() {
         lcd.print("Avstand:");
         lcd.gotoXY(0,-1);
         lcd.print(remaining_distance());
-        lcd.goto(7,-1);
+        lcd.gotoXY(7,-1);
         lcd.print("m");
     }
 }
