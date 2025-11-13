@@ -28,7 +28,7 @@ void displayStatus() {
 
         lcd.clear();
         lcd.gotoXY(0, 0);
-        lcd.print("Battery: ");
+        lcd.print("⚡︎: ");
         lcd.print(battery_cap);
         lcd.print("%");
 
