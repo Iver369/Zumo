@@ -1,6 +1,6 @@
 #include "line_follow.h"
 
-void crossroads() {
+/*void crossroads() {
   lineSensors.read(sensorValues);
 
   uint16_t leftOuter  = sensorValues[0];
@@ -19,12 +19,12 @@ void crossroads() {
   else{ 
     linefollow();
   }
-}
+} */
 
 void linefollow(){
   int pos = lineSensors.readLine(sensorValues);
 
-  int error = pos - 2000;
+  int error = 2000 - pos;
 
   float Kp = 0.2;          // Øk for skarpere svinger (0.2 - 0.4)
   int correction = error * Kp;
@@ -35,7 +35,7 @@ void linefollow(){
   leftSpeed  = constrain(leftSpeed,  -200, 200);
   rightSpeed = constrain(rightSpeed, -200, 200);
 
-  motors.setSpeeds(leftSpeed, rightSpeed);
+  motors.setSpeeds(rightSpeed, leftSpeed);
   }
 
 void turnRight() {
