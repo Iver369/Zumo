@@ -1,5 +1,4 @@
 #include "line_follow.h"
-#include "globals.h"
 
 void crossroads() {
   lineSensors.read(sensorValues);
