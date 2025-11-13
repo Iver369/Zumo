@@ -5,5 +5,6 @@
 
 void linefollow();
 void crossroads();
+void turnRight();
 
 #endif
