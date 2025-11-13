@@ -16,11 +16,11 @@ void crossroads() {
     turnRight();
   }
   else{ 
-    followLine();
+    linefollow();
   }
 }
 
-void followLine(){
+void linefollow(){
   lineSensors.initFiveSensors();
   int pos = lineSensors.readLine(sensorValues);
 
