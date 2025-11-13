@@ -3,17 +3,21 @@
 void displayStartup() {
     lcd.clear();
     lcd.gotoXY(0,0);
-    lcd.print("Calibration done!");
+    lcd.print("Kalibrert");
     delay(1500);
     lcd.clear();
     lcd.gotoXY(0,0);
-    lcd.print("Battery: ");
+    lcd.print("Batteri:");
+    lcd.gotoXY(0,-1);
     lcd.print(battery_cap);
+    lcd.gotoXY(7,-1);
     lcd.print("%");
     delay(1500);
     lcd.clear();
     lcd.gotoXY(0,0);
-    lcd.print("Ready to drive!");
+    lcd.print("Klar til");
+    lcd.gotoXY(0,-1);
+    lcd.print("å kjøre");
     delay(1500);
     lcd.clear();
 }
@@ -29,13 +33,17 @@ void displayStatus() {
         lcd.clear();
         lcd.gotoXY(0, 0);
         lcd.print("⚡︎: ");
+        lcd.gotoXY(0,-1);
         lcd.print(battery_cap);
+        lcd.gotoXY(8,-1);
         lcd.print("%");
 
-        lcd.gotoXY(0, 1);
-        lcd.print("Range: ");
+        lcd.gotoXY(0, 0);
+        lcd.print("Avstand:");
+        lcd.gotoXY(0,-1);
         lcd.print(remaining_distance());
-        lcd.print(" m");
+        lcd.goto(7,-1);
+        lcd.print("m");
     }
 }
 
