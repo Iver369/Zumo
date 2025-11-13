@@ -20,7 +20,6 @@ void crossroads() {
 }
 
 void linefollow(){
-  lineSensors.initFiveSensors();
   int pos = lineSensors.readLine(sensorValues);
 
   int error = pos - 2000;
@@ -41,7 +40,7 @@ void turnRight() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(50, -50);
+  motors.setSpeeds(100, -100);
   delay(400);
 
   motors.setSpeeds(baseSpeed, baseSpeed);
