@@ -8,16 +8,19 @@ void displayStartup() {
     lcd.clear();
     lcd.gotoXY(0,0);
     lcd.print("Batteri:");
-    lcd.gotoXY(0,-1);
+    lcd.gotoXY(0,1);
     lcd.print(battery_cap);
-    lcd.gotoXY(7,-1);
+    lcd.gotoXY(7,1);
     lcd.print("%");
     delay(1500);
     lcd.clear();
     lcd.gotoXY(0,0);
-    lcd.print("Klar til");
-    lcd.gotoXY(0,-1);
-    lcd.print("å kjøre");
+    lcd.print("Klar");
+    lcd.gotoXY(0,1);
+    lcd.print("til å");
+    delay(500);
+    lcd.gotoXY(0,0);
+    lcd.print("KJØRE!!")
     delay(1500);
     lcd.clear();
 }
@@ -33,16 +36,16 @@ void displayStatus() {
         lcd.clear();
         lcd.gotoXY(0, 0);
         lcd.print("⚡︎: ");
-        lcd.gotoXY(0,-1);
+        lcd.gotoXY(0,1);
         lcd.print(battery_cap);
-        lcd.gotoXY(8,-1);
+        lcd.gotoXY(8,1);
         lcd.print("%");
 
         lcd.gotoXY(0, 0);
         lcd.print("Avstand:");
-        lcd.gotoXY(0,-1);
+        lcd.gotoXY(0,1);
         lcd.print(remaining_distance());
-        lcd.gotoXY(7,-1);
+        lcd.gotoXY(7,1);
         lcd.print("m");
     }
 }
