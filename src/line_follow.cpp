@@ -24,7 +24,6 @@ void linefollow() {
   float Kp = 0.2;          // Øk for skarpere svinger (0.2 - 0.4)
   int correction = error * Kp;
 
-  int baseSpeed = 100;
   int leftSpeed  = baseSpeed + correction;
   int rightSpeed = baseSpeed - correction;
 
@@ -42,6 +41,6 @@ void turnRight() {
   motors.setSpeeds(150, -150);
   delay(400);
 
-  motors.setSpeeds(leftSpeed, rightSpeed);
+  motors.setSpeeds(baseSpeed, baseSpeed);
   delay(200);
 }
