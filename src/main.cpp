@@ -11,6 +11,10 @@ UltraSonicSensor sensor;
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   sensor.init(12, 11, 20.0); // Example pins and threshold
+<<<<<<< HEAD
+=======
+  // displayStartup();
+>>>>>>> 1d74d69 (linefollow)
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
@@ -26,9 +30,9 @@ void loop() {
   battery_calculator(deltaTime); 
   checkBatteryState();*/
 
-  sensor.readDistance();
-  sensor.averageDistance();
-  sensor.printDebug();
+   // sensor.readDistance();
+  // sensor.averageDistance();
+  // sensor.printDebug();
   /*if (sensor.isObstacleNear()) {
     Serial.println("Obstacle detected! Stopping motors.");
     motors.setSpeeds(0, 0); // Stop motors if obstacle is near
