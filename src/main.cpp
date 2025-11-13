@@ -15,6 +15,9 @@ void setup() {
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 seconds
+  lineSensors.readCalibrated(sensorValues); // Read calibrated values once
+  Serial.println("Calibrated sensor values:");
+  Serial.println(sensorValues[2]); // Print center sensor value
   Serial.println("Calibration complete."); // Indicate completion
 }
 
@@ -38,10 +41,9 @@ void loop() {
   linefollow();
   crossroads();
   Serial.print("Offset: ");
-  offset = lineSensors.readLine(sensorValues);
+  offset = lineSensors.readLine(sensorValues); // Read calibrated values
   Serial.print(offset);
-  Serial.println("");
-  lineSensors.readCalibrated(sensorValues); // Read calibrated values
+  Serial.println(""); 
   for (int i = 0; i < 5; i++) { // Loop through each sensor
     Serial.print("Sensor ");
     Serial.print(i);
