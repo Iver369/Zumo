@@ -1,6 +1,6 @@
 #include "line_follow.h"
 
-/*void crossroads() {
+void crossroads() {
   lineSensors.read(sensorValues);
 
   uint16_t leftOuter  = sensorValues[0];
@@ -19,12 +19,12 @@
   else{ 
     linefollow();
   }
-} */
+} 
 
 void linefollow(){
   int pos = lineSensors.readLine(sensorValues);
 
-  int error = 2000 - pos;
+  int error = pos - 2000;
 
   float Kp = 0.2;          // Øk for skarpere svinger (0.2 - 0.4)
   float correction = error * Kp;
