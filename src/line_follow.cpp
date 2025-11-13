@@ -42,7 +42,7 @@ void turnRight() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(150, -150);
+  motors.setSpeeds(50, -50);
   delay(400);
 
   motors.setSpeeds(baseSpeed, baseSpeed);
