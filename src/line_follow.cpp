@@ -7,15 +7,15 @@ void linefollow() {
 
   int error = pos - 2000;
 
-  float Kp = 0.15;          // Øk for skarpere svinger (0.2 - 0.4)
+  float Kp = 0.2;          // Øk for skarpere svinger (0.2 - 0.4)
   int correction = error * Kp;
 
-  int baseSpeed = 50;
+  int baseSpeed = 100;
   int leftSpeed  = baseSpeed + correction;
   int rightSpeed = baseSpeed - correction;
 
-  leftSpeed  = constrain(leftSpeed,  -100, 100);
-  rightSpeed = constrain(rightSpeed, -100, 100);
+  leftSpeed  = constrain(leftSpeed,  -200, 200);
+  rightSpeed = constrain(rightSpeed, -200, 200);
 
   motors.setSpeeds(leftSpeed, rightSpeed);
 
