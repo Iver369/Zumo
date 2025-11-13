@@ -19,7 +19,7 @@ void crossroads() {
   else{ 
     linefollow();
   }
-}
+} 
 
 void linefollow(){
   int pos = lineSensors.readLine(sensorValues);
@@ -27,7 +27,7 @@ void linefollow(){
   int error = pos - 2000;
 
   float Kp = 0.2;          // Øk for skarpere svinger (0.2 - 0.4)
-  int correction = error * Kp;
+  float correction = error * Kp;
 
   int leftSpeed  = baseSpeed + correction;
   int rightSpeed = baseSpeed - correction;

@@ -32,7 +32,7 @@ switch (state) {
             lcd.clear();
             lcd.gotoXY(0,0);
             lcd.print("Klar");
-            lcd.gotoXY(0,1);
+            lcd.gotoXY(0,0);
             lcd.print("til å");
             previousMillis = currentMillis;
             state = 3;

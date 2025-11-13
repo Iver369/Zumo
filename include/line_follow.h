@@ -4,7 +4,7 @@
 #include "globals.h"
 
 void linefollow();
-void crossroads();
+// void crossroads();
 void turnRight();
 
 #endif
