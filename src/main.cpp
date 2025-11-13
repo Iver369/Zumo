@@ -19,7 +19,7 @@ void setup() {
 }
 
 void loop() {
-  displayStatus();
+  // displayStatus();
   static unsigned long lastUpdate = 0;
   unsigned long now = millis();
   float deltaTime = (now - lastUpdate) / 1000.0; // seconds
