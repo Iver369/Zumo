@@ -4,5 +4,6 @@
 #include "globals.h"
 
 void linefollow();
+void crossroads();
 
 #endif
