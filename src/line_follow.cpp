@@ -1,21 +1,26 @@
 #include "line_follow.h"
 #include "globals.h"
 
-void linefollow() {
+void crossroads() {
+  lineSensors.read(sensorValues);
 
-  uint16_t leftOuter  = lineSensorValues[0];
-  uint16_t leftInner  = lineSensorValues[1];
-  uint16_t rightInner = lineSensorValues[3];
-  uint16_t rightOuter = lineSensorValues[4];
+  uint16_t leftOuter  = sensorValues[0];
+  uint16_t leftInner  = sensorValues[1];
+  uint16_t rightInner = sensorValues[3];
+  uint16_t rightOuter = sensorValues[4];
 
   bool leftSeen = leftOuter > threshold || leftInner > threshold;
   bool rightSeen = rightOuter > threshold || rightInner > threshold;
 
   if(leftSeen && rightSeen){
-    turnRight()
+    turnRight();
   }
   else{ 
+    followLine();
+  }
+}
 
+void followLine(){
   lineSensors.initFiveSensors();
   int pos = lineSensors.readLine(sensorValues);
 
@@ -32,7 +37,6 @@ void linefollow() {
 
   motors.setSpeeds(leftSpeed, rightSpeed);
   }
-}
 
 void turnRight() {
   motors.setSpeeds(0, 0);
