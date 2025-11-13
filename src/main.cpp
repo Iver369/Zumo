@@ -30,10 +30,10 @@ void loop() {
   sensor.readDistance();
   sensor.averageDistance();
   sensor.printDebug();
-  if (sensor.isObstacleNear()) {
+  /*if (sensor.isObstacleNear()) {
     Serial.println("Obstacle detected! Stopping motors.");
     motors.setSpeeds(0, 0); // Stop motors if obstacle is near
-  } else {
+  } else {*/
 
   linefollow();
   crossroads();
@@ -51,4 +51,3 @@ void loop() {
   }
   Serial.println();
   }
-}
