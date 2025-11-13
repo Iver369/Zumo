@@ -8,10 +8,12 @@ void crossroads() {
   uint16_t rightInner = sensorValues[3];
   uint16_t rightOuter = sensorValues[4];
 
-  bool leftSeen = leftOuter > threshold || leftInner > threshold;
-  bool rightSeen = rightOuter > threshold || rightInner > threshold;
+  bool leftSeen = leftOuter > threshold;
+  bool rightSeen = rightOuter > threshold;
+  bool centerSeen = sensorValues[2] > threshold;
 
-  if(leftSeen && rightSeen){
+
+  if(leftSeen && rightSeen && centerSeen){
     turnRight();
   }
   else{ 
@@ -41,7 +43,11 @@ void turnRight() {
   delay(100);
 
   motors.setSpeeds(100, -100);
-  delay(400);
+  delay(300);
+
+  while (lineSensors.readLine(sensorValues) > 2500) {
+    motors.setSpeeds(100, -100);
+  }
 
   motors.setSpeeds(baseSpeed, baseSpeed);
   delay(200);
