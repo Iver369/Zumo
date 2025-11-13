@@ -20,8 +20,8 @@ void displayStartup() {
     lcd.print("til å");
     delay(500);
     lcd.gotoXY(0,0);
-    lcd.print("KJØRE!!")
-    delay(1500);
+    lcd.print("KJØRE!!");
+    delay(500);
     lcd.clear();
 }
 
