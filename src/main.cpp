@@ -38,7 +38,7 @@ void loop() {
   } else */
 
   linefollow();
-  Serial.print("Offset: ");
+  /*Serial.print("Offset: ");
   offset = lineSensors.readLine(sensorValues); // Read calibrated values
   Serial.print(offset);
   Serial.println(""); 
@@ -49,6 +49,6 @@ void loop() {
     Serial.print(sensorValues[i]); // Print each sensor value
     Serial.print("   ");
   }
-  Serial.println();
+  Serial.println();*/
   displayStatus();
   }

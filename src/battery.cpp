@@ -24,11 +24,11 @@ float battery_calculator(float deltaTime) {
     lastLeftCount = leftCount;
     lastRightCount = rightCount;
 
-    float leftDist = deltaLeft * CM_PER_COUNT;
-    float rightDist = deltaRight * CM_PER_COUNT;
+    float leftDist = abs(deltaLeft * CM_PER_COUNT);
+    float rightDist = abs(deltaRight * CM_PER_COUNT);
     float avgDist = (leftDist + rightDist) / 2.0;
 
-    battery_cap -= abs(avgDist * power); 
+    battery_cap -= avgDist * power; 
     if (battery_cap < 0) battery_cap = 0;
     if (battery_cap > 100) battery_cap = 100;
 
