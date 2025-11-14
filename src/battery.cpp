@@ -3,6 +3,7 @@
 #include <zumo32U4Encoders.h>
 
 Zumo32U4Encoders encoders;
+const float CM_PER_COUNT = 0.55;
 
 float remaining_distance() {
     const float MAX_RANGE = 100.0; // meters when fully charged
@@ -10,7 +11,7 @@ float remaining_distance() {
 }
 
 float battery_calculator(float deltaTime) {
-    static int lastLeftCount = 0;
+     static int lastLeftCount = 0;
     static int lastRightCount = 0;
     int leftCount = encoders.getCountsLeft();
     int rightCount = encoders.getCountsRight();
@@ -21,13 +22,11 @@ float battery_calculator(float deltaTime) {
     lastLeftCount = leftCount;
     lastRightCount = rightCount;
 
-    float leftSpeed = deltaLeft / deltaTime;
-    float rightSpeed = deltaRight / deltaTime;
+    float leftDist = deltaLeft * CM_PER_COUNT;
+    float rightDist = deltaRight * CM_PER_COUNT;
+    float avgDist = (leftDist + rightDist) / 2.0;
 
-    float avgSpeed = (leftSpeed + rightSpeed) / 2.0;
-   
-    battery_cap -= abs(avgSpeed * power * 0.001); 
-
+    battery_cap -= abs(avgDist * power); 
     if (battery_cap < 0) battery_cap = 0;
     if (battery_cap > 100) battery_cap = 100;
 

@@ -21,10 +21,12 @@ void loop() {
   displayStatus();
   static unsigned long lastUpdate = 0;
   unsigned long now = millis();
-  float deltaTime = (now - lastUpdate) / 500; // seconds
-  lastUpdate = now;
-  battery_calculator(deltaTime); 
-  // checkBatteryState(); 
+  if (now - lastUpdate >= 500) {
+    float deltaTime = (now - lastUpdate) / 1000.0;
+    lastUpdate = now;
+    battery_calculator(deltaTime); 
+    // checkBatteryState(); 
+  } 
 
   /*sensor.readDistance();
   sensor.averageDistance();
