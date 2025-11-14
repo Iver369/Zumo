@@ -10,12 +10,12 @@ int offset = 0;
 
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
+  displayStartup();
   // sensor.init(12, 11, 20.0); // Example pins and threshold
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
   Serial.println("Calibration complete."); // Indicate completion
-  displayStartup(); // Show startup messages
 }
 
 void loop() {

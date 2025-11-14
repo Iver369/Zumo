@@ -9,7 +9,9 @@ switch (state) {
     case 0:
         lcd.clear();
         lcd.gotoXY(0,0);
-        lcd.print("Kalibrert");
+        lcd.print("Kalib-");
+        lcd.gotoXY(0,1);
+        lcd.print("rering");
         previousMillis = currentMillis;
         state = 1;
         break; 
