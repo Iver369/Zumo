@@ -16,6 +16,9 @@ void crossroads() {
   if(leftSeen && rightSeen && centerSeen){
     turnRight();
   }
+  else if (leftSeen && !rightSeen) {
+    turnLeft();
+  }
   else{ 
     linefollow();
   }
@@ -36,7 +39,7 @@ void linefollow(){
   rightSpeed = constrain(rightSpeed, -200, 200);
 
   motors.setSpeeds(leftSpeed, rightSpeed);
-  }
+}
 
 void turnRight() {
   motors.setSpeeds(0, 0);
@@ -48,6 +51,23 @@ void turnRight() {
   int pos = lineSensors.readLine(sensorValues);
   while (pos < 1800 || pos > 2200) {
     motors.setSpeeds(100, -100);
+    pos = lineSensors.readLine(sensorValues);
+  }
+
+  motors.setSpeeds(baseSpeed, baseSpeed);
+  delay(200);
+}
+
+void turnLeft() {
+  motors.setSpeeds(0, 0);
+  delay(100);
+
+  motors.setSpeeds(-100, 100);
+  delay(300);
+
+  int pos = lineSensors.readLine(sensorValues);
+  while (pos < 1800 || pos > 2200) {
+    motors.setSpeeds(-100, 100);
     pos = lineSensors.readLine(sensorValues);
   }
 
