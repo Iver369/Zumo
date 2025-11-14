@@ -4,6 +4,8 @@
 
 Zumo32U4Encoders encoders;
 const float CM_PER_COUNT = 0.055;
+bool isCharging = false;
+unsigned long chargeStartTime = 0;
 
 float remaining_distance() {
     const float MAX_RANGE = 2000.0; // meters when fully charged
@@ -11,7 +13,7 @@ float remaining_distance() {
 }
 
 float battery_calculator(float deltaTime) {
-     static int lastLeftCount = 0;
+    static int lastLeftCount = 0;
     static int lastRightCount = 0;
     int leftCount = encoders.getCountsLeft();
     int rightCount = encoders.getCountsRight();
@@ -75,3 +77,13 @@ void chargeBattery() {
     }
     Serial.println("Charging complete. Ready to drive!");
 }
+void chargeBattery() {
+    if (!isCharging) return;
+    if (millis() - chargeStartTime >= 100) {
+        chargeStartTime = millis();
+        if (battery_cap < 100) {
+            battery_cap++;
+            Serial.print("Ch:"); Serial.print(battery_cap); Serial.println("%");
+        } else isCharging = false;
+    }
+ }

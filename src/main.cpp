@@ -15,6 +15,7 @@ void setup() {
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
   Serial.println("Calibration complete."); // Indicate completion
+  displayStartup(); // Show startup messages
 }
 
 void loop() {
@@ -25,7 +26,7 @@ void loop() {
     float deltaTime = (now - lastUpdate) / 1000.0;
     lastUpdate = now;
     battery_calculator(deltaTime); 
-    // checkBatteryState(); 
+    checkBatteryState(); 
   } 
 
   /*sensor.readDistance();
