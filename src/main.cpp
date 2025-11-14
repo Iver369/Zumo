@@ -11,7 +11,6 @@ UltraSonicSensor sensor;
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   // sensor.init(12, 11, 20.0); // Example pins and threshold
-  displayStartup();
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
@@ -20,7 +19,7 @@ void setup() {
 
 void loop() {
   // displayStatus();
-  /* static unsigned long lastUpdate = 0;
+  /*static unsigned long lastUpdate = 0;
   unsigned long now = millis();
   float deltaTime = (now - lastUpdate) / 1000.0; // seconds
   lastUpdate = now;
@@ -48,4 +47,5 @@ void loop() {
     Serial.print("   ");
   }
   Serial.println();
+  displayStatus();
   }
