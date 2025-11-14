@@ -11,4 +11,4 @@ extern const float power;
 extern uint16_t threshold;
 extern int baseSpeed;
 extern bool isCharging;
-unsigned long chargeStartTime = 0;
+unsigned long chargeStartTime;
