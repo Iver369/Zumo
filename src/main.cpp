@@ -6,7 +6,7 @@
 #include "obstacle.h"
 
 int offset = 0;
-UltraSonicSensor sensor;
+// UltraSonicSensor sensor;
 
 void setup() {
   Serial.begin(9600); // Initialize Serial communication

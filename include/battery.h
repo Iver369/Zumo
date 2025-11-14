@@ -2,7 +2,7 @@
 #define BATTERY_H
 #include <Arduino.h>
 
-float battery_calculator(float deltaTime);
+int battery_calculator(float deltaTime);
 float remaining_distance();
 void checkBatteryState();
 void chargeBattery();

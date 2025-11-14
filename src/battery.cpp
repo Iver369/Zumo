@@ -9,7 +9,7 @@ float remaining_distance() {
     return (battery_cap / 100.0) * MAX_RANGE;
 }
 
-float battery_calculator(float deltaTime) {
+int battery_calculator(float deltaTime) {
     static int lastLeftCount = 0;
     static int lastRightCount = 0;
     int leftCount = encoders.getCountsLeft();
