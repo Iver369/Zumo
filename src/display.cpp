@@ -67,8 +67,8 @@ void displayStatus() {
         lastChangeDisplay = nowDisplay;
         showingBattery = !showingBattery;
         lcd.clear();
-
-        if (showingBattery) {
+    }
+    if (showingBattery) {
             // ⚡ Batteri-visning
             lcd.gotoXY(0, 0);
             lcd.print("Batteri:");
@@ -78,7 +78,7 @@ void displayStatus() {
             lcd.gotoXY(7, 1);
             lcd.print("%");
 
-        } else {
+    } else {
             // 📏 Avstands-visning
             lcd.gotoXY(0, 0);
             lcd.print("Avstand:");
@@ -87,6 +87,6 @@ void displayStatus() {
             lcd.gotoXY(7, 1);
             lcd.print("m");
             }
-        }
+        
     }
 
