@@ -6,7 +6,6 @@ Zumo32U4Encoders encoders;
 const float CM_PER_COUNT = 0.055;
 bool isCharging = false;
 unsigned long chargeStartTime = 0;
-
 float remaining_distance() {
     const float MAX_RANGE = 2000.0; // meters when fully charged
     return (battery_cap / 100.0) * MAX_RANGE;
@@ -59,14 +58,13 @@ void stopCarIfEmpty() {
     // Zumo line sensors for our line-following path is black tape, so we could use a special area of white tape to act as a charging station marker.
     bool atChargingStation = true;
     if (atChargingStation) {
+        isCharging = true; 
+        chargeStartTime = millis();
         chargeBattery();
     } else {
         Serial.println("Drive to the nearest charging station.");
     }
-
 }
-
-
 
 void chargeBattery() {
     if (!isCharging) return;
