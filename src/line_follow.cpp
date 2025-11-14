@@ -45,8 +45,10 @@ void turnRight() {
   motors.setSpeeds(100, -100);
   delay(300);
 
-  while (lineSensors.readLine(sensorValues) > 2500) {
+  int pos = lineSensors.readLine(sensorValues);
+  while (pos < 1800 || pos > 2200) {
     motors.setSpeeds(100, -100);
+    pos = lineSensors.readLine(sensorValues);
   }
 
   motors.setSpeeds(baseSpeed, baseSpeed);
