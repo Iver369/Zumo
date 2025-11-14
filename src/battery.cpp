@@ -66,17 +66,8 @@ void stopCarIfEmpty() {
 
 }
 
-void chargeBattery() {
-    Serial.println("Charging started...");
-    while (battery_cap < 100) {
-        battery_cap += 1;          
-        Serial.print("Charging: ");
-        Serial.print(battery_cap);
-        Serial.println("%");
-        delay(100);               
-    }
-    Serial.println("Charging complete. Ready to drive!");
-}
+
+
 void chargeBattery() {
     if (!isCharging) return;
     if (millis() - chargeStartTime >= 100) {
