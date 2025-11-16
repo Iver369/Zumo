@@ -7,7 +7,7 @@
 
 int offset = 0;
 // UltraSonicSensor sensor;
-test
+
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   displayStartup();
