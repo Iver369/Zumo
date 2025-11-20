@@ -1,6 +1,6 @@
 #include <display.h>
 
-int BatteryTimer=8000;
+int BatteryTimer=6000;
 int DistanceTimer=3000;
 int Timerstate=BatteryTimer;
 
@@ -21,8 +21,12 @@ void displayStatus() {
     if (nowDisplay - lastChangeDisplay >= Timerstate) {
         lastChangeDisplay = nowDisplay;
         showingBattery = !showingBattery;
-        if (Timerstate=BatteryTimer) Timerstate=DistanceTimer;
-        else if (Timerstate=DistanceTimer) Timerstate=BatteryTimer; 
+        if (Timerstate==BatteryTimer) {
+            Timerstate=DistanceTimer;
+        }
+        else if (Timerstate==DistanceTimer) {
+            Timerstate=BatteryTimer;
+        } 
         lcd.clear();
     }
     if (showingBattery) {
