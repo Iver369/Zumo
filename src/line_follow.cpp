@@ -39,16 +39,17 @@ void crossroads(){
   bool leftCross = (leftOuter && center);
   bool rightCross = (rightOuter && center);
 
-  if((leftCross || rightCross) && state == 0){
-      motors.setSpeeds(baseSpeed, baseSpeed);
-      delay(200);
-      return;
-      linefollow();
-    }
 
   if(state == 0) {
     if(battery_cap < 20) {
       state = 1;
+    }
+
+    if((leftCross || rightCross) && state == 0){
+      motors.setSpeeds(baseSpeed, baseSpeed);
+      delay(200);
+      return;
+      linefollow();
     }
 
     if(leftCross) {
@@ -74,7 +75,7 @@ void crossroads(){
   if(state == 2) {
     motors.setSpeeds(0,0);
     chargeBattery();
-    state = 3;
+    state = 0;
 
   if(state == 3) {
 
