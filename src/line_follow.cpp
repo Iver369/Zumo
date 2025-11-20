@@ -66,6 +66,26 @@ void crossroads(){
       delay(700);
       state = 2;
       return;
+      if(leftCross) {
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(-50, 200);
+        delay(700);
+        motors.setSpeeds(0 ,0);
+        delay(5000);
+        state = 2;
+        return;
+      }
+      else if(rightCross){
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(200, -50);
+        delay(700);
+        motors.setSpeeds(0 ,0);
+        delay(5000);
+        state = 2;
+        return;
+      }
     }
 
     else if(rightCross){
@@ -75,6 +95,26 @@ void crossroads(){
       delay(700);
       state = 2;
       return;
+      if(leftCross) {
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(-50, 200);
+        delay(700);
+        motors.setSpeeds(0 ,0);
+        delay(5000);
+        state = 2;
+        return;
+      }
+      else if(rightCross){
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(200, -50);
+        delay(700);
+        motors.setSpeeds(0 ,0);
+        delay(5000);
+        state = 2;
+        return;
+      }
     }
     linefollow();
     return;
@@ -84,6 +124,7 @@ void crossroads(){
     motors.setSpeeds(0,0);
     chargeBattery();
     state = 3;
+  }
 
   if(state == 3) {
 
@@ -105,5 +146,4 @@ void crossroads(){
       return;
     }
   }
-}
 }
