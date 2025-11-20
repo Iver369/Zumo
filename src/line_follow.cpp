@@ -34,8 +34,10 @@ void crossroads(){
 
 
   if(state == 0) {
-
-    if(battery_cap < 10) {
+    if(leftCross || rightCross){
+      motors.setSpeeds(baseSpeed, baseSpeed);
+    }
+    if(battery_cap < 15) {
       state = 1;
     }
 
