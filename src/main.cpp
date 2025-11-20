@@ -6,12 +6,12 @@
 #include "obstacle.h"
 
 int offset = 0;
-// UltraSonicSensor sensor;
+UltraSonicSensor sensor;
 
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   displayStartup();
-  // sensor.init(12, 11, 20.0); // Example pins and threshold
+  sensor.init(5, 6, 20.0); // pins and threshold
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
@@ -23,6 +23,14 @@ void loop() {
   static unsigned long lastUpdate = 0;
   unsigned long now = millis();
   chargeBattery();
+
+  sensor.readDistance();
+  sensor.averageDistance();
+  sensor.printDebug();
+  if (sensor.isObstacleNear()) {
+    Serial.println("Obstacle detected! Stopping motors.");
+    motors.setSpeeds(0, 0); // Stop motors if obstacle is near
+  } else 
 
   if (now - lastUpdate >= 500) {
     float deltaTime = (now - lastUpdate) / 1000.0;
@@ -54,12 +62,3 @@ void loop() {
   
   displayStatus();
 }
-
-  /*sensor.readDistance();
-  sensor.averageDistance();
-  sensor.printDebug();
-  if (sensor.isObstacleNear()) {
-    Serial.println("Obstacle detected! Stopping motors.");
-    motors.setSpeeds(0, 0); // Stop motors if obstacle is near
-  } else */
-
