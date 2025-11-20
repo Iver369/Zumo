@@ -5,7 +5,7 @@
 Zumo32U4Encoders encoders;
 const float CM_PER_COUNT = 0.055;
 float remaining_distance() {
-    const float MAX_RANGE = 2000.0; // meters when fully charged
+    const float MAX_RANGE = 50.0; // meters when fully charged
     return (battery_cap / 100.0) * MAX_RANGE;
 }
 
