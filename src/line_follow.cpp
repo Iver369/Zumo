@@ -2,6 +2,8 @@
 #include "battery.h"
 #include "globals.h"
 
+bool turning = false;
+
 int state = 0;
 
 void linefollow(){
@@ -72,6 +74,7 @@ void crossroads(){
   if(state == 2) {
     motors.setSpeeds(0,0);
     chargeBattery();
+    state = 3;
 
   if(state == 3) {
 

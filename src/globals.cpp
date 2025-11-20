@@ -15,4 +15,3 @@ uint16_t threshold = 500;
 bool isCharging = false;
 unsigned long chargeStartTime = 0;
 int baseSpeed = 100;
-bool turning = false;
