@@ -19,8 +19,8 @@ void linefollow(){
   int leftSpeed  = baseSpeed + correction;
   int rightSpeed = baseSpeed - correction;
 
-  leftSpeed  = constrain(leftSpeed,  -200, 200);
-  rightSpeed = constrain(rightSpeed, -200, 200);
+  leftSpeed  = constrain(leftSpeed,  -300, 300);
+  rightSpeed = constrain(rightSpeed, -300, 300);
 
   motors.setSpeeds(leftSpeed, rightSpeed);
 }
@@ -59,23 +59,23 @@ void crossroads(){
   }
 
   if(state == 1){
-    if(leftCross || rightCross) {
-            if(!crossDetected) {
-                crossStartTime = millis();
-                crossDetected = true;
-            }
-            else if(millis() - crossStartTime > 200) {
-                if(leftCross) turnLeft();
-                else turnRight();
-                state = 2;
-                crossDetected = false;
-                return;
-            }
-        }
-        else {
-            crossDetected = false;
-        }
+    if(leftCross) {
+      motors.setSpeeds(0,0);
+      delay(100);
+      motors.setSpeeds(-50, 200);
+      delay(700);
+      state = 2;
+      return;
+    }
 
+    else if(rightCross){
+      motors.setSpeeds(0,0);
+      delay(100);
+      motors.setSpeeds(200, -50);
+      delay(700);
+      state = 2;
+      return;
+    }
     linefollow();
     return;
   }
@@ -88,48 +88,22 @@ void crossroads(){
   if(state == 3) {
 
     if(leftCross) {
-      turnLeft();
-      delay(200);
+      motors.setSpeeds(0,0);
+      delay(100);
+      motors.setSpeeds(-50, 200);
+      delay(700);
       state = 0;
       return;
     }
 
     if(rightCross) {
-      turnRight();       
-      delay(200);
-      state = 0;          
+      motors.setSpeeds(0,0);
+      delay(100);
+      motors.setSpeeds(200, -50);
+      delay(700);
+      state = 0;
       return;
     }
-
-    linefollow();
-    return;
   }
 }
-}
-
-
-void turnRight() {
-  turning = true;    // slå av kryssdeteksjon
-
-  motors.setSpeeds(120, -120);
-  delay(1000);        // fast 90° sving
-
-  // kjør frem litt for å lande over linjen
-  motors.setSpeeds(100, 100);
-  delay(150);
-
-  turning = false;   // nå kan vi lese linjesensorer igjen
-}
-
-void turnLeft() {
-  turning = true;    // slå av kryssdeteksjon
-
-  motors.setSpeeds(-120, 120);
-  delay(1000);        // fast 90° sving
-
-  // kjør frem litt for å lande over linjen
-  motors.setSpeeds(100, 100);
-  delay(150);
-
-  turning = false;   // nå kan vi lese linjesensorer igjen
 }

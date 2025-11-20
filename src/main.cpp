@@ -24,13 +24,13 @@ void loop() {
   unsigned long now = millis();
   chargeBattery();
 
-  sensor.readDistance();
-  sensor.averageDistance();
-  sensor.printDebug();
-  if (sensor.isObstacleNear()) {
-    Serial.println("Obstacle detected! Stopping motors.");
-    motors.setSpeeds(0, 0); // Stop motors if obstacle is near
-  } else 
+  //sensor.readDistance();
+  //sensor.averageDistance();
+  //sensor.printDebug();
+  //if (sensor.isObstacleNear()) {
+    //Serial.println("Obstacle detected! Stopping motors.");
+    //motors.setSpeeds(0, 0); // Stop motors if obstacle is near
+  //} else 
 
   if (now - lastUpdate >= 500) {
     float deltaTime = (now - lastUpdate) / 1000.0;
