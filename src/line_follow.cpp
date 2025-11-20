@@ -43,9 +43,7 @@ void crossroads(){
     if(battery_cap < 20) {
       state = 1;
     }
-  }
 
-  if(state == 1){
     if(leftCross) {
       turnLeft();         
       motors.setSpeeds(0,0);
@@ -99,15 +97,12 @@ void turnRight() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  // grov sving
   motors.setSpeeds(120, -120);
   delay(320);
 
-  // kjør litt fram
   motors.setSpeeds(100, 100);
   delay(150);
 
-  // finn linjen igjen
   int pos = lineSensors.readLine(sensorValues);
   while(pos > 2500 || pos < 1500) {
     motors.setSpeeds(80, 80);
