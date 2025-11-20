@@ -1,28 +1,8 @@
 #include "line_follow.h"
+#include "battery.h"
+#include "globals.h"
 
-void crossroads() {
-  lineSensors.read(sensorValues);
-
-  uint16_t leftOuter  = sensorValues[0];
-  uint16_t leftInner  = sensorValues[1];
-  uint16_t rightInner = sensorValues[3];
-  uint16_t rightOuter = sensorValues[4];
-
-  bool leftSeen = leftOuter > threshold;
-  bool rightSeen = rightOuter > threshold;
-  bool centerSeen = sensorValues[2] > threshold;
-
-
-  if(leftSeen && rightSeen && centerSeen){
-    turnRight();
-  }
-  else if (leftSeen && !rightSeen) {
-    turnLeft();
-  }
-  else{ 
-    linefollow();
-  }
-} 
+int state = 0;
 
 void linefollow(){
   int pos = lineSensors.readLine(sensorValues);
@@ -40,6 +20,72 @@ void linefollow(){
 
   motors.setSpeeds(leftSpeed, rightSpeed);
 }
+
+
+void crossroads(){
+  lineSensors.read(sensorValues);
+
+  bool leftOuter  = sensorValues[0] > threshold;
+  bool rightOuter = sensorValues[4] > threshold;
+  bool center = sensorValues[2] > threshold;
+
+  bool leftCross = (leftOuter && center);
+  bool rightCross = (rightOuter && center);
+
+
+  if(state == 0) {
+
+    if(battery_cap < 10) {
+      state = 1;
+    }
+
+      if(state == 1 && leftCross) {
+        turnLeft();         
+        motors.setSpeeds(0,0);
+        delay(300);
+        state = 2;       
+        return;
+      }
+
+      if(state == 1 && rightCross) {
+        turnRight();        
+        motors.setSpeeds(0,0);
+        delay(300);
+        state = 2;     
+        return;
+      }
+    linefollow();
+    return;
+  }
+
+  if(state == 2) {
+    motors.setSpeeds(0,0);
+    chargeBattery();
+
+  if(state == 3) {
+
+    if(leftCross) {
+      turnLeft();
+      motors.setSpeeds(baseSpeed, baseSpeed);
+      delay(200);
+      state = 0;
+      return;
+    }
+
+    if(rightCross) {
+      turnRight();       
+      motors.setSpeeds(baseSpeed, baseSpeed);
+      delay(200);
+      state = 0;          
+      return;
+    }
+
+    linefollow();
+    return;
+  }
+}
+}
+
 
 void turnRight() {
   motors.setSpeeds(0, 0);
