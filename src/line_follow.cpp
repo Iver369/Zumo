@@ -43,22 +43,25 @@ void crossroads(){
     if(battery_cap < 20) {
       state = 1;
     }
+  }
 
-      if(state == 1 && leftCross) {
-        turnLeft();         
-        motors.setSpeeds(0,0);
-        delay(300);
-        state = 2;       
-        return;
-      }
+  if(state == 1){
+    if(leftCross) {
+      turnLeft();         
+      motors.setSpeeds(0,0);
+      delay(300);
+      state = 2;       
+      return;
+    }
 
-      if(state == 1 && rightCross) {
-        turnRight();        
-        motors.setSpeeds(0,0);
-        delay(300);
-        state = 2;     
-        return;
-      }
+    if(rightCross) {
+      turnRight();        
+      motors.setSpeeds(0,0);
+      delay(300);
+      state = 2;     
+      return;
+    }
+
     linefollow();
     return;
   }
@@ -96,21 +99,41 @@ void turnRight() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(100, 50);
-  delay(1000);
-  linefollow();
-  delay(2000);
-  motors.setSpeeds(0, 0);
-  
+  // grov sving
+  motors.setSpeeds(120, -120);
+  delay(320);
+
+  // kjør litt fram
+  motors.setSpeeds(100, 100);
+  delay(150);
+
+  // finn linjen igjen
+  int pos = lineSensors.readLine(sensorValues);
+  while(pos > 2500 || pos < 1500) {
+    motors.setSpeeds(80, 80);
+    pos = lineSensors.readLine(sensorValues);
+  }
+
+  motors.setSpeeds(0,0);
+  delay(100);
 }
 
 void turnLeft() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(50, 100);
-  delay(1000);
-  linefollow();
-  delay(2000);
-  motors.setSpeeds(0, 0);
+  motors.setSpeeds(-120, 120);
+  delay(320);
+
+  motors.setSpeeds(100, 100);
+  delay(150);
+
+  int pos = lineSensors.readLine(sensorValues);
+  while(pos > 2500 || pos < 1500) {
+    motors.setSpeeds(80, 80);
+    pos = lineSensors.readLine(sensorValues);
+  }
+
+  motors.setSpeeds(0,0);
+  delay(100);
 }
