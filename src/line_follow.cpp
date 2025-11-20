@@ -97,9 +97,9 @@ void turnRight() {
   delay(100);
 
   motors.setSpeeds(100, 50);
-  delay(500);
-  linefollow();
   delay(1000);
+  linefollow();
+  delay(2000);
   motors.setSpeeds(0, 0);
   
 }
@@ -109,8 +109,8 @@ void turnLeft() {
   delay(100);
 
   motors.setSpeeds(50, 100);
-  delay(500);
-  linefollow();
   delay(1000);
+  linefollow();
+  delay(2000);
   motors.setSpeeds(0, 0);
 }
