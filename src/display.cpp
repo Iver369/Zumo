@@ -7,9 +7,9 @@ int Timerstate=BatteryTimer;
 void displayStartup() {
     lcd.clear();
     lcd.gotoXY(0,0);
-    lcd.print("Kalib-");
+    lcd.print("Kalibr-");
     lcd.gotoXY(0,1);
-    lcd.print("rering");
+    lcd.print("ering");
 }
 
 void displayStatus() {
