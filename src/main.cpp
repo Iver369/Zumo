@@ -23,42 +23,43 @@ void loop() {
   static unsigned long lastUpdate = 0;
   unsigned long now = millis();
   chargeBattery();
+  sensor.readDistance();
+  sensor.averageDistance();
+  sensor.printDebug();
 
-  //sensor.readDistance();
-  //sensor.averageDistance();
-  //sensor.printDebug();
-  //if (sensor.isObstacleNear()) {
-    //Serial.println("Obstacle detected! Stopping motors.");
-    //motors.setSpeeds(0, 0); // Stop motors if obstacle is near
-  //} else 
+  if (sensor.isObstacleNear()) {
+    Serial.println("Obstacle detected! Stopping motors.");
+    motors.setSpeeds(0, 0); 
+  } 
+  else { 
 
-  if (now - lastUpdate >= 500) {
-    float deltaTime = (now - lastUpdate) / 1000.0;
-    lastUpdate = now;
+    if (now - lastUpdate >= 500) {
+      float deltaTime = (now - lastUpdate) / 1000.0;
+      lastUpdate = now;
+
+      if (!isCharging) {
+        battery_calculator(deltaTime);
+      }
+      checkBatteryState(); 
+    } 
 
     if (!isCharging) {
-      battery_calculator(deltaTime);
+      linefollow(); 
+      crossroads();
+      Serial.print("Offset: ");
+      offset = lineSensors.readLine(sensorValues);
+      Serial.print(offset);
+      Serial.println(""); 
+
+      for (int i = 0; i < 5; i++) {
+        Serial.print("Sensor ");
+        Serial.print(i);
+        Serial.print(": ");
+        Serial.print(sensorValues[i]);
+        Serial.print("   ");
+      }
+      Serial.println();
     }
-    
-    checkBatteryState(); 
-  }
-  
-  if (!isCharging) {
-    linefollow();
-    crossroads();
-    Serial.print("Offset: ");
-    offset = lineSensors.readLine(sensorValues);
-    Serial.print(offset);
-    Serial.println(""); 
-    for (int i = 0; i < 5; i++) {
-      Serial.print("Sensor ");
-      Serial.print(i);
-      Serial.print(": ");
-      Serial.print(sensorValues[i]);
-      Serial.print("   ");
-    }
-    Serial.println();
-  }
-  
+  } 
   displayStatus();
 }

@@ -7,8 +7,10 @@ void UltraSonicSensor::init(int trigPin, int echoPin, float threshold) {
     this->trigPin = trigPin;
     this->echoPin = echoPin;
     this->threshold = threshold;
+
     // In main.cpp write with actual values for the parameters sensor.init(trigPin, echoPin, threshold); after UltraSonicSensor sensor;
     Serial.println("Ultrasonic sensor initialized.");
+
 }
 
 float UltraSonicSensor::readDistance() {
@@ -19,9 +21,12 @@ float UltraSonicSensor::readDistance() {
     delayMicroseconds(10);
     digitalWrite(trigPin, LOW);
     // Read Echo Pin
-    long pulsetime = pulseIn(echoPin, HIGH);
-    // Calculate Distance
-    distance = (pulsetime * speedOfSound) / 2; // in cm
+    long pulsetime = pulseIn(echoPin, HIGH, 30000);
+    if (pulsetime == 0) {
+        distance = 999.0; // (no obstacle)
+    } else { // calculate distance
+        distance = (pulsetime * speedOfSound) / 2; // in cm
+    }
     return distance;
 }
 
@@ -31,14 +36,16 @@ void UltraSonicSensor::averageDistance() {
     readIndex = (readIndex + 1) % numReadings;
     for (int i = 0; i < numReadings; i++) {
         total = readings[i] + total;
+
     }
     average = total / numReadings;
 }
 
+
+
 void UltraSonicSensor::printDebug() {
     static unsigned long lastPrint = 0;
     unsigned long now = millis();
-
     if (now - lastPrint >= 250) { 
         lastPrint = now;
         Serial.print("Raw: ");
@@ -53,7 +60,6 @@ void UltraSonicSensor::printDebug() {
         Serial.println();
     }
 }
-
 
 bool UltraSonicSensor::isObstacleNear() {
     if (distance <= threshold) {
