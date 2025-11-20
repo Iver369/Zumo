@@ -36,7 +36,7 @@ void crossroads(){
   if(state == 0) {
     if((leftCross || rightCross) && state == 0){
       motors.setSpeeds(baseSpeed, baseSpeed);
-      delay(500);
+      delay(200);
       return;
       linefollow();
     }
@@ -97,7 +97,7 @@ void turnRight() {
   delay(100);
 
   motors.setSpeeds(100, -100);
-  delay(500);
+  delay(1000);
 
   int pos = lineSensors.readLine(sensorValues);
   while (pos < 1800 || pos > 2200) {
@@ -114,7 +114,7 @@ void turnLeft() {
   delay(100);
 
   motors.setSpeeds(-100, 100);
-  delay(500);
+  delay(1000);
 
   int pos = lineSensors.readLine(sensorValues);
   while (pos < 1800 || pos > 2200) {
