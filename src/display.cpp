@@ -1,5 +1,9 @@
 #include <display.h>
 
+int BatteryTimer=8000;
+int DistanceTimer=3000;
+int Timerstate=BatteryTimer;
+
 void displayStartup() {
     lcd.clear();
     lcd.gotoXY(0,0);
@@ -14,9 +18,11 @@ void displayStatus() {
     unsigned long nowDisplay = millis();
 
     // Bytt visning hvert 3 sekund
-    if (nowDisplay - lastChangeDisplay >= 3000) {
+    if (nowDisplay - lastChangeDisplay >= Timerstate) {
         lastChangeDisplay = nowDisplay;
         showingBattery = !showingBattery;
+        if (Timerstate=BatteryTimer) Timerstate=DistanceTimer;
+        else if (Timerstate=DistanceTimer) Timerstate=BatteryTimer; 
         lcd.clear();
     }
     if (showingBattery) {
