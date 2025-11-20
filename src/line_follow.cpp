@@ -96,32 +96,21 @@ void turnRight() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(100, -100);
+  motors.setSpeeds(100, 50);
+  delay(500);
+  linefollow();
   delay(1000);
-
-  int pos = lineSensors.readLine(sensorValues);
-  while (pos < 1800 || pos > 2200) {
-    motors.setSpeeds(100, -100);
-    pos = lineSensors.readLine(sensorValues);
-  }
-
-  motors.setSpeeds(baseSpeed, baseSpeed);
-  delay(200);
+  motors.setSpeeds(0, 0);
+  
 }
 
 void turnLeft() {
   motors.setSpeeds(0, 0);
   delay(100);
 
-  motors.setSpeeds(-100, 100);
+  motors.setSpeeds(50, 100);
+  delay(500);
+  linefollow();
   delay(1000);
-
-  int pos = lineSensors.readLine(sensorValues);
-  while (pos < 1800 || pos > 2200) {
-    motors.setSpeeds(-100, 100);
-    pos = lineSensors.readLine(sensorValues);
-  }
-
-  motors.setSpeeds(baseSpeed, baseSpeed);
-  delay(200);
+  motors.setSpeeds(0, 0);
 }
