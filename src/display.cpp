@@ -30,7 +30,7 @@ void displayStatus() {
         lcd.clear();
     }
     if (showingBattery) {
-            // ⚡ Batteri-visning
+            //  Batteri-visning
             lcd.gotoXY(0, 0);
             lcd.print("Batteri:");
 
@@ -40,7 +40,7 @@ void displayStatus() {
             lcd.print("%");
 
     } else {
-            // 📏 Avstands-visning
+            //  Avstands-visning
             lcd.gotoXY(0, 0);
             lcd.print("Avstand:");
             lcd.gotoXY(0, 1);
