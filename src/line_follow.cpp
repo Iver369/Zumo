@@ -30,7 +30,7 @@ void crossroads(){
   if (turning) {
     linefollow();
     return;
-}
+  }
 
   bool leftOuter  = sensorValues[0] > threshold;
   bool rightOuter = sensorValues[4] > threshold;
@@ -52,6 +52,11 @@ void crossroads(){
       linefollow();
     }
 
+    linefollow();
+    return;
+  }
+
+  if(state == 1){
     if(leftCross) {
       turnLeft();         
       motors.setSpeeds(0,0);
@@ -60,7 +65,7 @@ void crossroads(){
       return;
     }
 
-    if(rightCross) {
+    else if(rightCross) {
       turnRight();        
       motors.setSpeeds(0,0);
       delay(300);
@@ -75,13 +80,12 @@ void crossroads(){
   if(state == 2) {
     motors.setSpeeds(0,0);
     chargeBattery();
-    state = 0;
+    state = 3;
 
   if(state == 3) {
 
     if(leftCross) {
       turnLeft();
-      motors.setSpeeds(baseSpeed, baseSpeed);
       delay(200);
       state = 0;
       return;
@@ -89,7 +93,6 @@ void crossroads(){
 
     if(rightCross) {
       turnRight();       
-      motors.setSpeeds(baseSpeed, baseSpeed);
       delay(200);
       state = 0;          
       return;
@@ -105,7 +108,7 @@ void crossroads(){
 void turnRight() {
   turning = true;    // slå av kryssdeteksjon
 
-  motors.setSpeeds(-120, 120);
+  motors.setSpeeds(120, -120);
   delay(320);        // fast 90° sving
 
   // kjør frem litt for å lande over linjen
