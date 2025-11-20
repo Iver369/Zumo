@@ -25,6 +25,11 @@ void linefollow(){
 void crossroads(){
   lineSensors.read(sensorValues);
 
+  if (turning) {
+    linefollow();
+    return;
+}
+
   bool leftOuter  = sensorValues[0] > threshold;
   bool rightOuter = sensorValues[4] > threshold;
   bool center = sensorValues[2] > threshold;
@@ -32,14 +37,14 @@ void crossroads(){
   bool leftCross = (leftOuter && center);
   bool rightCross = (rightOuter && center);
 
-
-  if(state == 0) {
-    if((leftCross || rightCross) && state == 0){
+  if((leftCross || rightCross) && state == 0){
       motors.setSpeeds(baseSpeed, baseSpeed);
       delay(200);
       return;
       linefollow();
     }
+
+  if(state == 0) {
     if(battery_cap < 20) {
       state = 1;
     }
@@ -94,41 +99,27 @@ void crossroads(){
 
 
 void turnRight() {
-  motors.setSpeeds(0, 0);
-  delay(100);
+  turning = true;    // slå av kryssdeteksjon
 
-  motors.setSpeeds(120, -120);
-  delay(320);
+  motors.setSpeeds(-120, 120);
+  delay(320);        // fast 90° sving
 
+  // kjør frem litt for å lande over linjen
   motors.setSpeeds(100, 100);
   delay(150);
 
-  int pos = lineSensors.readLine(sensorValues);
-  while(pos > 2500 || pos < 1500) {
-    motors.setSpeeds(80, 80);
-    pos = lineSensors.readLine(sensorValues);
-  }
-
-  motors.setSpeeds(0,0);
-  delay(100);
+  turning = false;   // nå kan vi lese linjesensorer igjen
 }
 
 void turnLeft() {
-  motors.setSpeeds(0, 0);
-  delay(100);
+  turning = true;    // slå av kryssdeteksjon
 
   motors.setSpeeds(-120, 120);
-  delay(320);
+  delay(320);        // fast 90° sving
 
+  // kjør frem litt for å lande over linjen
   motors.setSpeeds(100, 100);
   delay(150);
 
-  int pos = lineSensors.readLine(sensorValues);
-  while(pos > 2500 || pos < 1500) {
-    motors.setSpeeds(80, 80);
-    pos = lineSensors.readLine(sensorValues);
-  }
-
-  motors.setSpeeds(0,0);
-  delay(100);
+  turning = false;   // nå kan vi lese linjesensorer igjen
 }

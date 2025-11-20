@@ -12,3 +12,4 @@ extern uint16_t threshold;
 extern int baseSpeed;
 extern bool isCharging;
 extern unsigned long chargeStartTime;
+extern bool turning = false;
