@@ -37,6 +37,7 @@ void loop() {
   
   if (!isCharging) {
     linefollow();
+    crossroads();
     Serial.print("Offset: ");
     offset = lineSensors.readLine(sensorValues);
     Serial.print(offset);
