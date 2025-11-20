@@ -3,6 +3,8 @@
 #include "globals.h"
 
 bool turning = false;
+unsigned long crossStartTime = 0;
+bool crossDetected = false;
 
 int state = 0;
 
@@ -57,21 +59,22 @@ void crossroads(){
   }
 
   if(state == 1){
-    if(leftCross) {
-      turnLeft();         
-      motors.setSpeeds(0,0);
-      delay(300);
-      state = 2;       
-      return;
-    }
-
-    else if(rightCross) {
-      turnRight();        
-      motors.setSpeeds(0,0);
-      delay(300);
-      state = 2;     
-      return;
-    }
+    if(leftCross || rightCross) {
+            if(!crossDetected) {
+                crossStartTime = millis();
+                crossDetected = true;
+            }
+            else if(millis() - crossStartTime > 200) {
+                if(leftCross) turnLeft();
+                else turnRight();
+                state = 2;
+                crossDetected = false;
+                return;
+            }
+        }
+        else {
+            crossDetected = false;
+        }
 
     linefollow();
     return;
@@ -109,7 +112,7 @@ void turnRight() {
   turning = true;    // slå av kryssdeteksjon
 
   motors.setSpeeds(120, -120);
-  delay(320);        // fast 90° sving
+  delay(1000);        // fast 90° sving
 
   // kjør frem litt for å lande over linjen
   motors.setSpeeds(100, 100);
@@ -122,7 +125,7 @@ void turnLeft() {
   turning = true;    // slå av kryssdeteksjon
 
   motors.setSpeeds(-120, 120);
-  delay(320);        // fast 90° sving
+  delay(1000);        // fast 90° sving
 
   // kjør frem litt for å lande over linjen
   motors.setSpeeds(100, 100);
