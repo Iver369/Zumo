@@ -10,7 +10,7 @@ void displayStartup() {
     display.setLayout21x8();
     display.gotoXY(0,0);
     display.print("Kalibr-");
-    display.gotoXY(0,1);
+    display.gotoXY(0,0);
     display.print("ering");
 }
 
