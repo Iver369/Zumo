@@ -5,6 +5,26 @@
 #include "line_follow.h"
 #include "obstacle.h"
 
+/* void setup() {
+  display.clear();
+  display.setLayout21x8();  // Use normal small font
+  display.gotoXY(0,0);
+  display.print("OLED Test");
+  delay(1000);
+}
+
+void loop() {
+  static uint32_t counter = 0;
+
+  display.gotoXY(0,2);
+  display.print("Count:");
+  display.gotoXY(7,2);
+  display.print(counter);
+
+  counter++;
+  delay(200);
+} */
+
 int offset = 0;
 UltraSonicSensor sensor;
 
