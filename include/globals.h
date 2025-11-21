@@ -4,7 +4,7 @@
 
 extern Zumo32U4Motors motors;
 extern Zumo32U4LineSensors lineSensors;
-extern Zumo32U4LCD lcd;
+extern Zumo32U4OLED display;
 extern unsigned int sensorValues[5];
 extern float battery_cap;
 extern const float power;

@@ -5,11 +5,12 @@ int DistanceTimer=3000;
 int Timerstate=BatteryTimer;
 
 void displayStartup() {
-    lcd.clear();
-    lcd.gotoXY(0,0);
-    lcd.print("Kalibr-");
-    lcd.gotoXY(0,1);
-    lcd.print("ering");
+    display.clear();
+    display.setLayout21x8();
+    display.gotoXY(0,0);
+    display.print("Kalibr-");
+    display.gotoXY(0,1);
+    display.print("ering");
 }
 
 void displayStatus() {
@@ -27,26 +28,26 @@ void displayStatus() {
         else if (Timerstate==DistanceTimer) {
             Timerstate=BatteryTimer;
         } 
-        lcd.clear();
+        display.clear();
     }
     if (showingBattery) {
             //  Batteri-visning
-            lcd.gotoXY(0, 0);
-            lcd.print("Batteri:");
+            display.gotoXY(0, 0);
+            display.print("Batteri:");
 
-            lcd.gotoXY(0, 1);
-            lcd.print(battery_cap);
-            lcd.gotoXY(7, 1);
-            lcd.print("%");
+            display.gotoXY(0, 1);
+            display.print(battery_cap);
+            display.gotoXY(7, 1);
+            display.print("%");
 
     } else {
             //  Avstands-visning
-            lcd.gotoXY(0, 0);
-            lcd.print("Avstand:");
-            lcd.gotoXY(0, 1);
-            lcd.print(remaining_distance());
-            lcd.gotoXY(7, 1);
-            lcd.print("m");
+            display.gotoXY(0, 0);
+            display.print("Avstand:");
+            display.gotoXY(0, 1);
+            display.print(remaining_distance());
+            display.gotoXY(7, 1);
+            display.print("m");
             }
         
     }

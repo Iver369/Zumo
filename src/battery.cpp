@@ -18,6 +18,9 @@ float battery_calculator(float deltaTime) {
     int deltaLeft = leftCount - lastLeftCount;
     int deltaRight = rightCount - lastRightCount;
 
+    Serial.print("L: "); Serial.print(leftCount);
+    Serial.print(" R: "); Serial.println(rightCount);
+
     lastLeftCount = leftCount;
     lastRightCount = rightCount;
 
