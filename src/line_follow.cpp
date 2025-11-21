@@ -65,6 +65,8 @@ void crossroads(){
       motors.setSpeeds(-50, 200);
       delay(700);
       state = 2;
+      linefollow();
+      delay(200);
       if(leftCross) {
         motors.setSpeeds(0,0);
         delay(100);
@@ -91,6 +93,8 @@ void crossroads(){
       motors.setSpeeds(200, -50);
       delay(700);
       state = 2;
+      linefollow();
+      delay(200);
       if(leftCross){
         motors.setSpeeds(0,0);
         delay(100);
