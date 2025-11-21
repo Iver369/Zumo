@@ -14,4 +14,4 @@ const float power=0.05; // kan justeres for hvor fort batteriet skal tømmes
 uint16_t threshold = 500;
 bool isCharging = false;
 unsigned long chargeStartTime = 0;
-int baseSpeed = 100;
+int baseSpeed = 200;
