@@ -40,10 +40,10 @@ void crossroads(){
 
   bool leftCross = (leftOuter && center);
   bool rightCross = (rightOuter && center);
-
+  bool isCross = (leftCross && rightCross);
 
   if(state == 0) {
-    if(battery_cap < 20) {
+    if(battery_cap < 25) { 
       state = 1;
     }
 
@@ -63,79 +63,53 @@ void crossroads(){
       motors.setSpeeds(0,0);
       delay(100);
       motors.setSpeeds(-50, 200);
-      delay(700);
+      delay(500);
       state = 2;
-      linefollow();
-      delay(200);
-      if(leftCross) {
-        motors.setSpeeds(0,0);
-        delay(100);
-        motors.setSpeeds(-50, 200);
-        delay(700);
-        stopCarIfEmpty();
-        state = 2;
-        return;
-      }
-      else if(rightCross){
-        motors.setSpeeds(0,0);
-        delay(100);
-        motors.setSpeeds(200, -50);
-        delay(700);
-        stopCarIfEmpty();
-        state = 2;
-        return;
-      }
+      return;
     }
 
     else if(rightCross){
       motors.setSpeeds(0,0);
       delay(100);
       motors.setSpeeds(200, -50);
-      delay(700);
+      delay(500);
       state = 2;
-      linefollow();
-      delay(200);
-      if(leftCross){
-        motors.setSpeeds(0,0);
-        delay(100);
-        motors.setSpeeds(-50, 200);
-        delay(700);
-        stopCarIfEmpty();
-        state = 2;
-        return;
-      }
-      else if(rightCross){
-        motors.setSpeeds(0,0);
-        delay(100);
-        motors.setSpeeds(200, -50);
-        delay(700);
-        stopCarIfEmpty();
-        state = 2;
-        return;
-      }
+      return;
     }
     linefollow();
     return;
   }
 
   if(state == 2) {
-    motors.setSpeeds(0,0);
-    chargeBattery();
-    state = 3;
+    if (leftCross) {
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(-50, 200);
+        delay(500);
+        motors.setSpeeds(100, 100);
+        delay(200);
+        stopCarIfEmpty();
+        state = 3;        
+        return;
+    }
+    else if (rightCross) {
+        motors.setSpeeds(0,0);
+        delay(100);
+        motors.setSpeeds(200, -50);
+        delay(500);
+        motors.setSpeeds(100, 100);
+        delay(200);
+        stopCarIfEmpty();
+        state = 3;
+        return;
+    }
+
+    linefollow();
+    return;
   }
 
   if(state == 3) {
-
-    if(leftCross) {
-      motors.setSpeeds(0,0);
-      delay(100);
-      motors.setSpeeds(-50, 200);
-      delay(700);
-      state = 0;
-      return;
-    }
-
-    if(rightCross) {
+    if(isCross) {
       motors.setSpeeds(0,0);
       delay(100);
       motors.setSpeeds(200, -50);
