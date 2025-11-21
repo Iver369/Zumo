@@ -11,6 +11,7 @@ UltraSonicSensor sensor;
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   displayStartup();
+  pinMode(13, OUTPUT);
   sensor.init(5, 6, 10.0); // pins and threshold
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
@@ -22,17 +23,23 @@ void loop() {
   displayStatus();
   static unsigned long lastUpdate = 0;
   unsigned long now = millis();
+  static unsigned long Sensortime = 0;
   chargeBattery();
-  sensor.readDistance();
-  sensor.averageDistance();
-  sensor.printDebug();
 
-  if (sensor.isObstacleNear()) {
-    Serial.println("Obstacle detected! Stopping motors.");
-    motors.setSpeeds(0, 0); 
+      if (now - Sensortime > 50) {
+        Sensortime = now; 
+        digitalWrite(13, HIGH);
+        sensor.readDistance();
+        sensor.averageDistance();
+        sensor.printDebug();
+        digitalWrite(13, LOW);
+
+      if (sensor.isObstacleNear()) {
+      Serial.println("Obstacle detected! Stopping motors.");
+      motors.setSpeeds(0, 0); 
+      return;
   } 
-  else { 
-
+}
     if (now - lastUpdate >= 500) {
       float deltaTime = (now - lastUpdate) / 1000.0;
       lastUpdate = now;
@@ -60,6 +67,5 @@ void loop() {
       }
       Serial.println();
     }
-  } 
-  displayStatus();
-}
+      displayStatus();
+} 
