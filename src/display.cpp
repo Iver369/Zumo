@@ -1,5 +1,6 @@
 #include <display.h>
 
+Zumo32U4OLED display;
 int BatteryTimer=6000;
 int DistanceTimer=3000;
 int Timerstate=BatteryTimer;
