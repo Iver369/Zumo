@@ -33,12 +33,11 @@ void loop() {
         sensor.averageDistance();
         sensor.printDebug();
         digitalWrite(13, LOW);
-
-      if (sensor.isObstacleNear()) {
+  } 
+  if (sensor.isObstacleNear()) {
       Serial.println("Obstacle detected! Stopping motors.");
       motors.setSpeeds(0, 0); 
       return;
-  } 
 }
     if (now - lastUpdate >= 500) {
       float deltaTime = (now - lastUpdate) / 1000.0;
