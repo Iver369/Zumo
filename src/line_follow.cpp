@@ -71,8 +71,7 @@ void crossroads(){
         delay(100);
         motors.setSpeeds(-50, 200);
         delay(700);
-        motors.setSpeeds(0 ,0);
-        delay(5000);
+        stopCarIfEmpty();
         state = 2;
         return;
       }
@@ -81,8 +80,7 @@ void crossroads(){
         delay(100);
         motors.setSpeeds(200, -50);
         delay(700);
-        motors.setSpeeds(0 ,0);
-        delay(5000);
+        stopCarIfEmpty();
         state = 2;
         return;
       }
@@ -100,8 +98,7 @@ void crossroads(){
         delay(100);
         motors.setSpeeds(-50, 200);
         delay(700);
-        motors.setSpeeds(0 ,0);
-        delay(5000);
+        stopCarIfEmpty();
         state = 2;
         return;
       }
@@ -110,8 +107,7 @@ void crossroads(){
         delay(100);
         motors.setSpeeds(200, -50);
         delay(700);
-        motors.setSpeeds(0 ,0);
-        delay(5000);
+        stopCarIfEmpty();
         state = 2;
         return;
       }
