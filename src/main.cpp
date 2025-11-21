@@ -11,7 +11,7 @@ UltraSonicSensor sensor;
 void setup() {
   Serial.begin(9600); // Initialize Serial communication
   displayStartup();
-  sensor.init(5, 6, 20.0); // pins and threshold
+  sensor.init(5, 6, 10.0); // pins and threshold
   // Initialize shared line sensor object and motors (defined in globals.cpp)
   lineSensors.initFiveSensors(); // Initialize all five line sensors
   calibrateLineSensors(lineSensors, motors, 5000); // Calibrate for 5 secondss
